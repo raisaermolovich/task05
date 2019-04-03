@@ -7,9 +7,12 @@ import by.epam.javawebtraining.yermalovich.task05.util.ClientStatus;
 import by.epam.javawebtraining.yermalovich.task05.view.LogPrinter;
 
 import java.util.Objects;
+import java.util.Random;
 
 
 public class Client implements Runnable {
+
+    private static final int WAITING_TIME = 5000;
 
     private Company company;
     private Thread thread;
@@ -101,6 +104,14 @@ public class Client implements Runnable {
                         case WAITING: {
                             LogPrinter.LOGGER.info("Client N" + thread.getId()
                                     + " continues to wait for connection.");
+                            Random random = new Random();
+                            try {
+                                Thread.sleep(random.nextInt(WAITING_TIME));
+                            } catch (InterruptedException e) {
+                                LogPrinter.LOGGER.info("InterruptedException in Cient N" + thread.getId() + ".");
+                                status = Status.DISCONNECTING;
+                            }
+
                             break;
                         }
 
