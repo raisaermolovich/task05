@@ -80,7 +80,7 @@ public class Client implements Runnable {
         Operator operator = null;
 
         try {
-            while (status == Status.WAITING && !hasFinished) {
+            while (status == Status.RECALL || !hasFinished) {
                 operator = company.connectCall(waitingTime);
 
                 if (operator != null) {
@@ -103,7 +103,6 @@ public class Client implements Runnable {
                         }
 
                         case RECALL:
-                            status = Status.WAITING;
                             LogPrinter.LOGGER.info("Client N" + thread.getId()
                                     + " has re-called.");
                             break;
@@ -112,6 +111,7 @@ public class Client implements Runnable {
                         case DISCONNECTING: {
                             LogPrinter.LOGGER.info("Client N" + thread.getId()
                                     + " stops waiting for connection and disconnects.");
+                            hasFinished = true;
                             break;
 
                         }
