@@ -2,6 +2,7 @@ package by.epam.javawebtraining.yermalovich.task05.model.resource;
 
 import by.epam.javawebtraining.yermalovich.task05.view.LogPrinter;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 
@@ -32,4 +33,24 @@ public class Operator {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Operator operator = (Operator) o;
+        return operatorNumber == operator.operatorNumber;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(operatorNumber);
+    }
+
+    @Override
+    public String toString() {
+        return "Operator{" +
+                "operatorNumber=" + operatorNumber +
+                '}';
+    }
 }

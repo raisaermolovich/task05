@@ -6,6 +6,8 @@ import by.epam.javawebtraining.yermalovich.task05.model.resource.Operator;
 import by.epam.javawebtraining.yermalovich.task05.util.ClientStatus;
 import by.epam.javawebtraining.yermalovich.task05.view.LogPrinter;
 
+import java.util.Objects;
+
 
 public class Client implements Runnable {
 
@@ -130,5 +132,36 @@ public class Client implements Runnable {
             }
 
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return hasFinished == client.hasFinished &&
+                waitingTime == client.waitingTime &&
+                callingTime == client.callingTime &&
+                Objects.equals(company, client.company) &&
+                Objects.equals(thread, client.thread) &&
+                status == client.status;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(company, thread, status, hasFinished, waitingTime, callingTime);
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "company=" + company +
+                ", thread=" + thread +
+                ", status=" + status +
+                ", hasFinished=" + hasFinished +
+                ", waitingTime=" + waitingTime +
+                ", callingTime=" + callingTime +
+                '}';
     }
 }

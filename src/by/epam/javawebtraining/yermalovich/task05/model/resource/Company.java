@@ -3,6 +3,7 @@ package by.epam.javawebtraining.yermalovich.task05.model.resource;
 import by.epam.javawebtraining.yermalovich.task05.view.LogPrinter;
 
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
@@ -37,4 +38,26 @@ public class Company {
         semaphore.release();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Company company = (Company) o;
+        return Objects.equals(semaphore, company.semaphore) &&
+                Objects.equals(operatorsList, company.operatorsList);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(semaphore, operatorsList);
+    }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "semaphore=" + semaphore +
+                ", operatorsList=" + operatorsList +
+                '}';
+    }
 }
